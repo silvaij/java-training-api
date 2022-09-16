@@ -13,7 +13,6 @@ public class UserDto implements Serializable {
     private String cpf;
     private LocalDate birthDate;
 
-
     public UserDto(){};
 
     public UserDto(Long id, String name, String email, String cpf, LocalDate birthDate ){
@@ -30,6 +29,5 @@ public class UserDto implements Serializable {
         email     = user.getEmail();
         cpf       = user.getCpf();
         birthDate = user.getBirthDate();
-
     }
 }
