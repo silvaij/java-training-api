@@ -83,6 +83,7 @@ Seguem algumas referências a respeito:
 
 - [Validador Spring](https://www.zup.com.br/blog/spring-validation-o-que-e?utm_source=google-chat&utm_medium=interno&utm_campaign=gc-geral)
 - [Validador dados com anotações](https://www.devmedia.com.br/bean-validation-1-1-validando-dados-com-anotacoes/30070)
+- [Bean Validation, diferença entre: @NotNull,@NotEmpty e @NotBlank](https://javabahia.github.io/jsr-303-bean-validation-algumas-anotacoes/)
 - [Bean validation](https://emmanuelneri.com.br/2017/05/30/criando-validacoes-de-bean-validation-customizadas/)
 - [Validador Hibernate](https://www.devmedia.com.br/hibernate-validator-validando-dados-no-back-end-com-anotacoes/37979)
 - [Validar CPF](https://www.devmedia.com.br/validando-o-cpf-em-uma-aplicacao-java/22097)

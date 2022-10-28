@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 import javax.persistence.*;
-
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -37,7 +35,7 @@ public class User implements Serializable {
 	public class LocalDateSpringConverter implements Converter<String, LocalDate> {
 
 		@Override
-		public LocalDate convert(String value) {
+		public  LocalDate convert(String value) {
 			if (value != null) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				return LocalDate.parse(value, formatter);
@@ -50,8 +48,7 @@ public class User implements Serializable {
 	//Construtores
 	public User(){};
 
-	public User(Long id,String name,String email,String cpf,LocalDate birthDate ){
-		this.id = id;
+	public User(String name,String email,String cpf,LocalDate birthDate ){
 		this.name = name;
 		this.email = email;
 		this.cpf = cpf;

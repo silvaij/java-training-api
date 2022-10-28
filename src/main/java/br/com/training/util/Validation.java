@@ -10,9 +10,10 @@ public class Validation {
                 throw new ResourceNotFoundException("Objeto não pode estar vazio ou nulo");
             }
         }
-
         if(obj == null){
             throw new ResourceNotFoundException("Objeto não pode estar vazio ou nulo");
         }
     }
+
+
 }

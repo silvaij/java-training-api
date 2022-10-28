@@ -1,5 +1,6 @@
 package br.com.training.service;
 
+import br.com.training.dto.UserDtoRequest;
 import br.com.training.model.User;
 import br.com.training.repository.UserRepository;
 import br.com.training.service.exception.ResourceNotFoundException;
@@ -11,11 +12,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+
+import java.util.*;
 
 @Service
 public class UserService {
@@ -30,9 +28,14 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public User saveUser(User user){
-        userRepository.save(user);
-        return user;
+    public User saveUser(UserDtoRequest dto){
+           User user = dto.castUserDtobyUser();
+        try{
+            userRepository.save(user);
+            return  user;
+        }catch (DataIntegrityViolationException e){
+           throw new ResourceNotFoundException("Erro ao inserir usuario "+ user.getName()+" Erro: "+ e);
+        }
     }
 
     @Transactional(readOnly = true)
@@ -46,19 +49,23 @@ public class UserService {
         Validation.assertNotEmpty(user.getCpf());
         User userDb = findByCpf(cpf);
         BeanUtils.copyProperties(user,userDb,"id");
-        return userRepository.save(userDb);
+        try{
+          return userRepository.save(userDb);
+        }catch (DataIntegrityViolationException e){
+            throw new ResourceNotFoundException("Erro ao atualizar registro");
+        }
     }
 
     @Transactional
     public void delete(String cpf){
-        long id = 1l;
+        Long id = 1l;
         try{
-            id = userRepository.findByCpf(cpf).get().getId();
+            id = userRepository.findByCpf(cpf).orElseThrow().getId();
             userRepository.deleteById(id);
         } catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Usuario nao encontrado");
         } catch (EmptyResultDataAccessException e){
-            throw new EmptyResultDataAccessException("Usuario nao encontrado",(int)id);
+            throw new EmptyResultDataAccessException("Usuario nao encontrado", id.intValue());
         } catch (DataIntegrityViolationException e){
             throw new DataIntegrityViolationException("Erro de integridade PK");
         }
