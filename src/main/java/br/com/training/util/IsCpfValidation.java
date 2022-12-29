@@ -19,8 +19,11 @@ public class IsCpfValidation implements ConstraintValidator<IsCpf,String> {
             return false;
         }
 
-        int d1, d2;
-        int digito1, digito2, resto;
+        int d1; 
+        int d2;
+        int digito1; 
+        int digito2; 
+        int resto;
         int digitoCPF;
         String nDigResult;
 
@@ -37,7 +40,7 @@ public class IsCpfValidation implements ConstraintValidator<IsCpf,String> {
             // para o segundo digito repita o procedimento incluindo o primeiro
             // digito calculado no passo anterior.
             d2 = d2 + (12 - nCount) * digitoCPF;
-        };
+        }
 
         // Primeiro resto da divisão por 11.
         resto = (d1 % 11);
